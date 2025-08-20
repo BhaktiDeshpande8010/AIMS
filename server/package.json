@@ -1,0 +1,38 @@
+{
+  "name": "agri-drone-accounts-server",
+  "version": "1.0.0",
+  "description": "Backend server for Agri-Drone Accounts System",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "seed": "node seeders/sampleData.js seed",
+    "setup-email": "node setup-email.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.18.2",
+    "html-pdf-node": "^1.0.8",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.17.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^7.0.5",
+    "pdfkit": "^0.17.1",
+    "puppeteer": "^24.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "express",
+    "api",
+    "accounts",
+    "inventory"
+  ],
+  "author": "Agri-Drone Manufacturing",
+  "license": "MIT"
+}
