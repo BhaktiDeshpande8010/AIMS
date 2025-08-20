@@ -7,27 +7,7 @@ services:
     plan: free
     buildCommand: cd server && npm install
     startCommand: cd server && npm start
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: 10000
-      - key: MONGODB_URI
-        fromDatabase:
-          name: agri-drone-accounts-db
-          property: connectionString
-      - key: JWT_SECRET
-        generateValue: true
-      - key: JWT_EXPIRE
-        value: 30d
-      - key: EMAIL_SERVICE
-        value: gmail
-      - key: EMAIL_USER
-        sync: false
-      - key: EMAIL_PASS
-        sync: false
-      - key: EMAIL_FROM
-        sync: false
+
     healthCheckPath: /api/health
 
   # Frontend Static Site
@@ -39,10 +19,4 @@ services:
     staticPublishPath: client/dist
     envVars:
       - key: VITE_API_URL
-        value: https://agri-drone-accounts-api.onrender.com
-
-databases:
-  - name: agri-drone-accounts-db
-    databaseName: AccountsIMS
-    user: agri-drone-user
-    plan: free
+        value: https://agri-drone-accounts-api.onrender.com/api

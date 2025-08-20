@@ -10,7 +10,7 @@ import path from 'path';
 import fs from 'fs';
 
 // Get all purchase orders with pagination and filtering
-export const getPurchases = async (req, res) => {
+const getPurchases = async (req, res) => {
   try {
     const {
       page = 1,
@@ -80,7 +80,7 @@ export const getPurchases = async (req, res) => {
 };
 
 // Create new purchase order with file upload support
-export const createPurchase = async (req, res) => {
+const createPurchase = async (req, res) => {
   try {
     let purchaseData = { ...req.body };
 
@@ -262,7 +262,7 @@ export const createPurchase = async (req, res) => {
 };
 
 // Get purchase order by ID
-export const getPurchaseById = async (req, res) => {
+const getPurchaseById = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -299,7 +299,7 @@ export const getPurchaseById = async (req, res) => {
 };
 
 // Update purchase order
-export const updatePurchase = async (req, res) => {
+const updatePurchase = async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
@@ -346,7 +346,7 @@ export const updatePurchase = async (req, res) => {
 };
 
 // Delete purchase order
-export const deletePurchase = async (req, res) => {
+const deletePurchase = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -389,7 +389,7 @@ export const deletePurchase = async (req, res) => {
 };
 
 // Generate Invoice PDF
-export const generateInvoice = async (req, res) => {
+const generateInvoice = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -460,7 +460,7 @@ export const generateInvoice = async (req, res) => {
 };
 
 // Generate Bill PDF
-export const generateBill = async (req, res) => {
+const generateBill = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -524,7 +524,7 @@ export const generateBill = async (req, res) => {
 };
 
 // Download Invoice PDF
-export const downloadInvoice = async (req, res) => {
+const downloadInvoice = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -569,7 +569,7 @@ export const downloadInvoice = async (req, res) => {
 // Workflow automation endpoints
 
 // Approve purchase order
-export const approvePurchase = async (req, res) => {
+const approvePurchase = async (req, res) => {
   try {
     const { id } = req.params;
     const { approverName, approverRole, notes } = req.body;
@@ -606,7 +606,7 @@ export const approvePurchase = async (req, res) => {
 };
 
 // Mark purchase as delivered
-export const markDelivered = async (req, res) => {
+const markDelivered = async (req, res) => {
   try {
     const { id } = req.params;
     const { deliveryDate, notes } = req.body;
@@ -644,7 +644,7 @@ export const markDelivered = async (req, res) => {
 };
 
 // Mark purchase as invoiced (with file upload)
-export const markInvoiced = async (req, res) => {
+const markInvoiced = async (req, res) => {
   try {
     const { id } = req.params;
     const { notes } = req.body;
@@ -686,7 +686,7 @@ export const markInvoiced = async (req, res) => {
 };
 
 // Mark purchase as paid
-export const markPaid = async (req, res) => {
+const markPaid = async (req, res) => {
   try {
     const { id } = req.params;
     const { paymentDate, notes } = req.body;
@@ -724,7 +724,7 @@ export const markPaid = async (req, res) => {
 };
 
 // Reject purchase order
-export const rejectPurchase = async (req, res) => {
+const rejectPurchase = async (req, res) => {
   try {
     const { id } = req.params;
     const { rejectedBy, reason, notes } = req.body;
@@ -761,7 +761,7 @@ export const rejectPurchase = async (req, res) => {
 };
 
 // Get dashboard statistics
-export const getDashboardStats = async (req, res) => {
+const getDashboardStats = async (req, res) => {
   try {
     const stats = await PurchaseOrder.getDashboardStats();
     const result = stats[0] || {
@@ -793,7 +793,7 @@ export const getDashboardStats = async (req, res) => {
 };
 
 // Download Bill PDF
-export const downloadBill = async (req, res) => {
+const downloadBill = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -836,7 +836,7 @@ export const downloadBill = async (req, res) => {
 };
 
 // Get purchase statistics
-export const getPurchaseStats = async (req, res) => {
+const getPurchaseStats = async (req, res) => {
   try {
     const stats = await PurchaseOrder.aggregate([
       {
@@ -875,4 +875,24 @@ export const getPurchaseStats = async (req, res) => {
       error: error.message
     });
   }
+};
+
+// Export all functions
+export {
+  getPurchases,
+  createPurchase,
+  getPurchaseById,
+  updatePurchase,
+  deletePurchase,
+  generateInvoice,
+  generateBill,
+  downloadInvoice,
+  approvePurchase,
+  markDelivered,
+  markInvoiced,
+  markPaid,
+  rejectPurchase,
+  getDashboardStats,
+  downloadBill,
+  getPurchaseStats
 };
