@@ -36,8 +36,12 @@ connectDB().then(async () => {
 });
 
 // Middleware
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? ['https://agri-drone-accounts-frontend.onrender.com', 'https://agri-drone-accounts.onrender.com']
+  : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'];
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
+  origin: allowedOrigins,
   credentials: true
 }));
 app.use(express.json());
