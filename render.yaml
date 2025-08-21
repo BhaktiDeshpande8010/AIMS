@@ -5,9 +5,28 @@ services:
     name: agri-drone-accounts-api
     env: node
     plan: free
-    buildCommand: cd server && npm install
-    startCommand: cd server && npm start
-
+    rootDir: agri-drone-accounts/server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        value: mongodb+srv://bhaktiabhay99:prym_inventory@aims.t6epzsk.mongodb.net/AccountsIMS?retryWrites=true&w=majority&appName=AIMS
+      - key: JWT_SECRET
+        value: agri-drone-super-secret-jwt-key-for-production-2024
+      - key: JWT_EXPIRE
+        value: 30d
+      - key: EMAIL_SERVICE
+        value: gmail
+      - key: EMAIL_USER
+        value: bhaktiabhay99@gmail.com
+      - key: EMAIL_PASS
+        value: ugxbhlnivlugxhsb
+      - key: EMAIL_FROM
+        value: bhaktiabhay99@gmail.com
     healthCheckPath: /api/health
 
   # Frontend Static Site
@@ -15,8 +34,9 @@ services:
     name: agri-drone-accounts-frontend
     env: static
     plan: free
-    buildCommand: cd client && npm install && npm run build
-    staticPublishPath: client/dist
+    rootDir: agri-drone-accounts/client
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://agri-drone-accounts-api.onrender.com/api

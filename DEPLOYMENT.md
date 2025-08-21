@@ -17,7 +17,10 @@ This application is configured for deployment on Render with the following archi
 
 ### 🔧 Deployment Steps
 
-#### Option 1: Using Render Blueprint (Recommended)
+#### Option 1: Manual Deployment (Recommended)
+
+**IMPORTANT**: Due to repository structure, manual deployment works better than Blueprint.
+
 1. **Push to GitHub**:
    ```bash
    git add .
@@ -25,21 +28,17 @@ This application is configured for deployment on Render with the following archi
    git push origin main
    ```
 
-2. **Deploy on Render**:
-   - Go to [Render Dashboard](https://dashboard.render.com)
-   - Click "New" → "Blueprint"
-   - Connect your GitHub repository
-   - Select the `render.yaml` file
-   - Click "Apply"
-
-#### Option 2: Manual Deployment
+#### Option 2: Using Render Blueprint (Alternative)
 
 ##### Backend Deployment:
 1. **Create Web Service**:
-   - Service Type: Web Service
-   - Build Command: `cd server && npm install`
-   - Start Command: `cd server && npm start`
-   - Environment: Node
+   - Go to [Render Dashboard](https://dashboard.render.com)
+   - Click "New" → "Web Service"
+   - Connect your GitHub repository: `https://github.com/BhaktiDeshpande8010/AIMS`
+   - **Root Directory**: `agri-drone-accounts/server`
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+   - **Environment**: Node
 
 2. **Environment Variables**:
    ```
@@ -56,9 +55,12 @@ This application is configured for deployment on Render with the following archi
 
 ##### Frontend Deployment:
 1. **Create Static Site**:
-   - Service Type: Static Site
-   - Build Command: `cd client && npm install && npm run build`
-   - Publish Directory: `client/dist`
+   - Go to [Render Dashboard](https://dashboard.render.com)
+   - Click "New" → "Static Site"
+   - Connect your GitHub repository: `https://github.com/BhaktiDeshpande8010/AIMS`
+   - **Root Directory**: `agri-drone-accounts/client`
+   - **Build Command**: `npm install && npm run build`
+   - **Publish Directory**: `dist`
 
 2. **Environment Variables**:
    ```
