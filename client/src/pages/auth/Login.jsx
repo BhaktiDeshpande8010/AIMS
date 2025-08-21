@@ -19,10 +19,14 @@ const Login = () => {
 
   // Redirect if already authenticated
   useEffect(() => {
-    if (authService.isAuthenticated()) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
+    const checkAuth = () => {
+      if (authService.isAuthenticated()) {
+        navigate('/dashboard', { replace: true });
+      }
+    };
+
+    checkAuth();
+  }, []); // Empty dependency array to run only once
 
   const handleChange = (e) => {
     const { name, value } = e.target;

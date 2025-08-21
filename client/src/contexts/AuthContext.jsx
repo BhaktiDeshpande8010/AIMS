@@ -30,24 +30,17 @@ export const AuthProvider = ({ children }) => {
       const token = authService.getStoredToken();
       
       if (storedUser && token) {
-        // Verify token is still valid by fetching current user
-        try {
-          const response = await authService.getCurrentUser();
-          if (response.success) {
-            setUser(response.data);
-            setIsAuthenticated(true);
-          } else {
-            // Token is invalid, clear auth
-            authService.clearAuth();
-          }
-        } catch (error) {
-          // Token is invalid, clear auth
-          authService.clearAuth();
-        }
+        // For initial load, trust stored user to prevent API loops
+        setUser(storedUser);
+        setIsAuthenticated(true);
+      } else {
+        setUser(null);
+        setIsAuthenticated(false);
       }
     } catch (error) {
       console.error('Error initializing auth:', error);
-      authService.clearAuth();
+      setUser(null);
+      setIsAuthenticated(false);
     } finally {
       setLoading(false);
     }
